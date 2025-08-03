@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - BảoHuỳnh Store</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <link rel="icon" href="image/logo.png" type="image/x-icon">
+</head>
+<body>
+  <header>
+    <a href="BaoHuynh.html" class="logo"><i class='bx bx-devices'></i>BảoHuỳnh</a>
+    <ul class="navbar">
+      <li><a href="BaoHuynh.html">Home</a></li>
+      <li><a href="Register.html">Register</a></li>
+    </ul>
+  </header>
+
+  <div class="auth-page" id="login-page">
+    <h1>Login</h1>
+    <form id="login-form">
+      <label for="login-email">Email:</label>
+      <input type="email" id="login-email" placeholder="Enter your email" required>
+
+      <label for="login-password">Password:</label>
+<div class="password-container">
+  <input type="password" id="login-password" placeholder="Enter your password" required>
+  <button type="button" id="toggle-password" class="toggle-password">
+    <i class='bx bx-show'></i>
+  </button>
+</div>
+
+
+      <button type="submit" class="btn">Login</button>
+    </form>
+  </div>
+
+
+ <!-- ...existing code... -->
+<script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+</head>
+<body>
+  <header>
+  <a href="BaoHuynh.html" class="logo"><i class='bx bx-devices'></i>BảoHuỳnh</a>
+  <ul class="navbar">
+    <li><a href="BaoHuynh.html">Home</a></li>
+ 
+  </ul>
+</header>
+
+  <div class="cart-page" id="cart-page">
+    <h1><br>My Cart</br></h1>
+    <div id="cart-content"></div>
+  </div>
+  <script>
+  const userName = localStorage.getItem('userName');
+  const userEmail = localStorage.getItem('userEmail');
+  const cartContent = document.getElementById('cart-content');
+
+  // Lấy giỏ hàng từ localStorage (nếu chưa có thì tạo mẫu)
+  let cart = JSON.parse(localStorage.getItem('cart')) || [
+    { name: 'iPhone 16', quantity: 2, price: 1000 },
+    { name: 'Samsung Galaxy S21 Ultra 5G', quantity: 1, price: 500 }
+  ];
+
+  function renderCart() {
+    if (cart.length === 0) {
+      cartContent.innerHTML = "<p>Giỏ hàng của bạn đang trống.</p>";
+      localStorage.setItem('cart', JSON.stringify(cart));
+      return;
+    }
+    let total = 0;
+    let rows = cart.map((item, idx) => {
+      const itemTotal = item.quantity * item.price;
+      total += itemTotal;
+      return `
+        <tr>
+          <td>${item.name}</td>
+          <td>
+            <input type="number" min="1" value="${item.quantity}" data-idx="${idx}" class="qty-input" style="width:50px;">
+          </td>
+          <td>$${item.price}</td>
+          <td>$${itemTotal}</td>
+          <td>
+            <button class="delete-btn" data-idx="${idx}">Xóa</button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+    cartContent.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows}
+        </tbody>
+      </table>
+      <p>Total Amount: $${total}</p>
+      <button class="btn">Proceed to Checkout</button>
+    `;
+
+    // Gắn sự kiện xóa
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.onclick = function() {
+        const idx = this.getAttribute('data-idx');
+        cart.splice(idx, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+      };
+    });
+
+    // Gắn sự kiện sửa số lượng
+    document.querySelectorAll('.qty-input').forEach(input => {
+      input.onchange = function() {
+        const idx = this.getAttribute('data-idx');
+        let val = parseInt(this.value);
+        if (val < 1) val = 1;
+        cart[idx].quantity = val;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+      };
+    });
+  }
+
+  if (!userName || !userEmail) {
+    cartContent.innerHTML = `<p style="color:red;">Bạn cần <a href="Login.html">đăng nhập</a> để xem giỏ hàng.</p>`;
+  } else {
+    renderCart();
+  }
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

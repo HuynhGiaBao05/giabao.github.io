@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BảoHuỳnh Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="icon" href="image/logo.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <a href="#" class="logo"><i class='bx bx-devices'></i>BảoHuỳnh</a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <ul class="navbar">
+            <li><a href ="#home" class="home-active">Home</a></li>
+            <li><a href ="#categories">Categories</a></li>
+            <li><a href ="#products">Products</a></li>
+            <li><a href ="#about">About</a></li>
+            <li><a href ="#customers">Customers</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="cart.html">Cart</a></li>
+        </ul>
+        <div class="profile">
+            <img src="image/logo.png" alt="">
+            <span>BẢOHUỲNH store </span>
+            <i class='bx bx-caret-down' ></i>
+        </div>
+        <div class="logout-btn">
+  <a href="#" onclick="logout()">Logout</a>
+</div>
+
+    </header>
+    <section class="home swiper" id="home">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide container">
+                <div class="home-text">
+                    <span>Me the second</span>
+                    <h1>  <br> Cheap </br>Quality</h1>
+                    <a href="#products" class="btn">Shop Now<i class='bx bx-right-arrow-alt' ></i></a>
+                </div>
+                <img src="image/phone1.png" alt="">
+            </div>
+            <div class="swiper-slide container">
+                <div class="home-text">
+                    <span>Me The Second</span>
+                    <h1>Buddy just <br> make your <br>best decision</h1>
+                    <a href="#products" class="btn">Shop Now<i class='bx bx-right-arrow-alt' ></i></a>
+                </div>
+                <img src="image/phone2.png" alt="">
+            </div>
+            <div class="swiper-slide container">
+                <div class="home-text">
+                    <span>Me The Second</span>
+                    <h1> Buddy just <br> make your <br> best decision</h1>
+                    <a href="#products" class="btn">Shop Now<i class='bx bx-right-arrow-alt' ></i></a>
+                </div>
+                <img src="image/phone3.png" alt="">
+            </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </section>
+    <section class="categories" id="categories">
+        <div class="heading">
+            <h1>Find Out Latest <br><span>Categories</span></h1>
+            <a href="#" class="btn">See All<i class='bx bx-right-arrow-alt' ></i></a>
+        </div>
+        <div class="categories-container">
+            <div class="box box1">
+                <img src="image/cate1.png" alt="">
+                <h2>iPhone</h2>
+                <span>22 Items</span>
+                <i class='bx bx-right-arrow-alt' ></i>
+                <div class="overlay">
+      <a href="#">Khám phá ngay</a>
+    </div>
+            </div>
+            <div class="box box2">
+                <img src="image/cate2.png" alt="">
+                <h2>Samsung</h2>
+                <span>22 Items</span>
+                <i class='bx bx-right-arrow-alt' ></i>
+               <div class="overlay">
+      <a href="#">Khám phá ngay</a>
+    </div>
+            </div>
+            <div class="box box3">
+                <img src="image/cate3.png" alt="">
+                <h2>Nokia</h2>
+                <span>22 Items</span>
+                <i class='bx bx-right-arrow-alt' ></i>
+                <div class="overlay">
+      <a href="#">Khám phá ngay</a>
+    </div>
+            </div>
+            <div class="box box4">
+                <img src="image/cate4.png" alt="">
+                <h2>Oppo</h2>
+                <span>22 Items</span>
+                <i class='bx bx-right-arrow-alt' ></i>
+                <div class="overlay">
+      <a href="#">Khám phá ngay</a>
+    </div>
+            </div>
+            <div class="box box5">
+                <img src="image/cate5.png" alt="">
+                <h2>Xiaomi</h2>
+                <span>22 Items</span>
+                <i class='bx bx-right-arrow-alt' ></i>
+                <div class="overlay">
+      <a href="#">Khám phá ngay</a>
+    </div>
+            </div>
+    </section>
+    <section class="products" id="products">
+        <div class="heading">
+            <h1>Our Popular <br><span>Products</span></h1>
+            <a href="#" class="btn">Shop Now<i class='bx bx-right-arrow-alt' ></i></a>
+        </div>
+        <div class="products-container">
+            <div class="box">
+                <img src="image/p1.png" alt="">
+                <span>iOS Items</span>
+                <h2>Iphone 16Promax 1TB<br>VN/A</h2>
+                <h3 class="price">$1.336,26 <span>/1p</span></h3>
+                <i class='bx bx-cart-alt'></i>
+                <i class='bx bx-heart'></i>
+                <span class="discount">-5%</span>
+            </div>
+            <div class="box">
+                <img src="image/p2.png" alt="">
+                <span>iOS Items</span>
+                <h2>SamSung Galaxy S24 Ultra 5G <br>VN/A</h2>
+                <h3 class="price">$992,65 <span>/1p</span></h3>
+                <i class='bx bx-cart-alt'></i>
+                <i class='bx bx-heart'></i>
+                <span class="discount">-5%</span>
+            </div>
+            <div class="box">
+                <img src="image/p3.png" alt="">
+                <span>iOS Items</span>
+                <h2>OPPO Reno 14 Pro 5G 12GB/512GB Phone<br>VN/A</h2>
+                <h3 class="price">$1599 <span>/1p</span></h3>
+                <i class='bx bx-cart-alt'></i>
+                <i class='bx bx-heart'></i>
+                <span class="discount">-5%</span>
+            </div>
+            <div class="box">
+                <img src="image/p4.png" alt="">
+                <span>iOS Items</span>
+                <h2>OPPO A3x 4GB/64GB Phone<br>NT</h2>
+                <h3 class="price">$130,95 <span>/1p</span></h3>
+                <i class='bx bx-cart-alt'></i>
+                <i class='bx bx-heart'></i>
+                <span class="discount">-5%</span>
+            </div>
+            <div class="box">
+                <img src="image/p5.png" alt="">
+                <span>iOS Items</span>
+                <h2>Samsung Galaxy Z Flip7 5G 12GB/512GB Phone<br>VN/A</h2>
+                <h3 class="price">$1.183,55 <span>/1p</span></h3>
+                <i class='bx bx-cart-alt'></i>
+                <i class='bx bx-heart'></i>     
+                <span class="discount">-5%</span>
+            </div>
+            <div class="box">
+                <img src="image/p6.png" alt="">
+                <span>iOS Items</span>
+                <h2>Samsung Galaxy Z Fold7 5G 12GB/256GB Phone<br>VN/A</h2>
+                <h3 class="price">$1.908,95 <span>/1p</span></h3>
+                <i class='bx bx-cart-alt'></i>
+                <i class='bx bx-heart'></i>
+                <span class="discount">-5%</span>
+            </div>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <img src="image/about.png" alt="">
+        <div class="about-text">
+            <span>About Us</span>
+            <p>Modern smartphones have evolved into indispensable companions in daily life, blending advanced technology with elegant, compact designs. Equipped with high-performance processors, vibrant screens, and sophisticated cameras, these devices support everything from communication and work to entertainment.</p>
+            <p>Features such as rapid charging, enhanced security, and customizable user experiences make smartphones adaptable to a wide range of preferences and routines. Whether connecting with others, capturing special moments, or organizing tasks while on the move, today's phones are built to deliver greater convenience and elevate everyday living.
+                </p>
+            <a href="#" class="btn">Learn More<i class='bx bx-right-arrow-alt' ></i></a>
+        </div>
+    </section>
+    <section class="customers" id="customers">
+        <h2>Why Customer Love Us?</h2>
+        <div class="customers-container">
+            <div class="box">
+                <i class='bx bxs-quote-alt-left'></i>
+                <div class="stars">
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star-half' ></i>
+                </div>
+                <p>Modern, smooth design, very good and enthusiastic warranty and return policy.</p>
+                <div class="review-profile">
+                    <img src="image/c1.png" alt="">
+                    <h3>Uynhi</h3>
+                </div>
+            </div>
+            <div class="box">
+                <i class='bx bxs-quote-alt-left'></i>
+                <div class="stars">
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star-half' ></i>
+                </div>
+                <p>Very good quality, I have bought many times. Very satisfied.</p>
+                <div class="review-profile">
+                    <img src="image/messi.png" alt="">
+                    <h3>Lionel Messi</h3>
+                </div>
+            </div>
+            <div class="box">
+                <i class='bx bxs-quote-alt-left'></i>
+                <div class="stars">
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star-half' ></i>
+                </div>
+                <p>Very reputable shop, enthusiastic support.
+                </p>
+                <div class="review-profile">
+                    <img src="image/c3.png" alt="">
+                    <h3>Mai Chi Nguyen</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="footer" id="footer">
+        <div class="footer-box">
+            <a href="#" class="logo"><i class='bx bx-devices'></i>BảoHuỳnh store</a>
+            <p>Go vap,Ho Chi Minh city, <br>Viet Nam</p>
+            <p>Phone:+84 384078353</p>
+            <div class="social">
+                <a href="#"><i class='bx bxl-facebook' ></i></a>
+                <a href="#"><i class='bx bxl-instagram' ></i></a>
+                <a href="#"><i class='bx bxl-twitter' ></i></a>
+                <a href="#"><i class='bx bxl-youtube' ></i></a>
+            </div>
+        </div>
+        <div class="footer-box">
+            <h2>Categories</h2>
+            <a href="#">iOS & Accessories</a>
+            <a href="#">Android & Accessories</a>
+            <a href="#">Oppo & Accessories</a>
+            <a href="#">Nokia & Accessories</a>
+        </div>
+        <div class="footer-box">
+            <h2>Useful Links</h2>
+            <a href="#">Payment & Tax</a>
+            <a href="#">Term Of Use</a>
+            <a href="#">My Blog</a>
+            <a href="#">Return Policy</a>
+        </div>
+        <div class="footer-box">
+            <h2>Newsletter</h2>
+            <p>Get 10% Discount with <br>Email Newsletter</p>
+            <form action="">
+                <i class='bx bxs-envelope' ></i>
+                <input type="email" name="" id="" placeholder="Enter Your Email" required>
+                <i class='bx bx-arrow-back bx-rotate-180' ></i>
+            </form>
+        </div>
+    </section>
+    <div class="copyright">
+        <p>5ec0nd, 2024, All Right Reserved</p>
+    </div>
+    <section id="contact">
+        <div class="heading">
+            <h1>Contact Us</h1>
+        </div>
+        <form action="#" class="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" placeholder="Enter your message" required></textarea>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </section>
+    <!-- Script thêm vào giỏ hàng -->
+    <script>
+    document.querySelectorAll('.products-container .box').forEach(box => {
+      box.querySelector('.bx-cart-alt').addEventListener('click', function() {
+        const name = box.querySelector('h2').innerText;
+        const price = parseFloat(box.querySelector('.price').innerText.replace(/[^0-9.]/g, ''));
+        const img = box.querySelector('img').getAttribute('src');
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const idx = cart.findIndex(item => item.name === name);
+        if (idx > -1) {
+          cart[idx].quantity += 1;
+        } else {
+          cart.push({ name, price, quantity: 1, img });
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('Đã thêm vào giỏ hàng!');
+      });
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="main.js"></script>
+     <script>
+  function logout() {
+    // Xoá dữ liệu đăng nhập khỏi localStorage
+    localStorage.removeItem('username');
+    localStorage.removeItem('isLoggedIn');
+
+    // Hiển thị thông báo
+    alert("Bạn đã đăng xuất!");
+
+    // Chuyển về trang đăng nhập
+    window.location.href = "login.html";
+  }
+</script>
+
+
+
+
+
+</body>
+</html>

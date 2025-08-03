@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+  <link rel="icon" href="image/logo.png" type="image/x-icon">
+</head>
+<body>
+  <header>
+    <a href="BaoHuynh.html" class="logo"><i class='bx bx-devices'></i>BảoHuỳnh</a>
+    <ul class="navbar">
+      <li><a href="BaoHuynh.html">Home</a></li>
+      <li><a href="Cart.html">Cart</a></li>
+      <li><a href="Profile.html">Profile</a></li>
+      <li><a href="Login.html">Login</a></li>
+    </ul>
+  </header>
+  <div class="profile-page" id="profile-page">
+    <h1>Profile</h1>
+    <div class="profile-wrapper">
+      <div class="profile-logo">
+        <img src="image/logo.png" alt="Profile Picture">
+      </div>
+      <div class="profile-details" id="profile-details"></div>
+      <button class="btn" id="edit-btn">Edit Profile</button>
+    </div>
+  </div>
+  <script>
+    const profileDetails = document.getElementById('profile-details');
+    const editBtn = document.getElementById('edit-btn');
+
+    function getUserInfo() {
+      return {
+        name: localStorage.getItem('userName'),
+        email: localStorage.getItem('userEmail'),
+        phone: localStorage.getItem('registeredPhone')
+      };
+    }
+
+    function renderProfile(editMode = false) {
+      const { name, email, phone } = getUserInfo();
+      if (!name || !email) {
+        profileDetails.innerHTML = `<p style="color:red;">Bạn cần <a href="Login.html">đăng nhập</a> để xem thông tin cá nhân.</p>`;
+        editBtn.style.display = "none";
+      } else if (!editMode) {
+        profileDetails.innerHTML = `
+          <h2>Name: ${name}</h2>
+          <p>Email: ${email}</p>
+          <p>Phone: ${phone ? phone : '(chưa cập nhật)'}</p>
+          <p>Joined: (chưa cập nhật)</p>
+        `;
+        editBtn.textContent = "Edit Profile";
+        editBtn.onclick = () => renderProfile(true);
+        editBtn.style.display = "inline-block";
+      } else {
+        profileDetails.innerHTML = `
+          <label>Name: <input type="text" id="edit-name" value="${name}" /></label><br>
+          <label>Email: <input type="email" id="edit-email" value="${email}" /></label><br>
+          <label>Phone: <input type="tel" id="edit-phone" value="${phone ? phone : ''}" /></label><br>
+          <button id="save-btn" class="btn">Lưu</button>
+          <button id="cancel-btn" class="btn">Hủy</button>
+        `;
+        document.getElementById('save-btn').onclick = () => {
+          localStorage.setItem('userName', document.getElementById('edit-name').value.trim());
+          localStorage.setItem('userEmail', document.getElementById('edit-email').value.trim());
+          localStorage.setItem('registeredPhone', document.getElementById('edit-phone').value.trim());
+          renderProfile(false);
+        };
+        document.getElementById('cancel-btn').onclick = () => renderProfile(false);
+        editBtn.textContent = "Đang chỉnh sửa...";
+        editBtn.onclick = null;
+      }
+    }
+    renderProfile(false);
+  </script>
+  <script src="main.js"></script>
+</body>
+</html>

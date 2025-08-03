@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - BảoHuỳnh Store</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <link rel="icon" href=image/logo.png" type="image/x-icon">
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo"><i class='bx bx-devices'></i>BảoHuỳnh</a>
+    <ul class="navbar">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Login.html">Login</a></li>
+    </ul>
+  </header>
+
+  <div class="auth-page" id="register-page">
+    <h1>Register</h1>
+    <form id="register-form">
+      <label for="register-name">Name:</label>
+      <input type="text" id="register-name" placeholder="Enter your name" required>
+
+      <label for="register-email">Email:</label>
+      <input type="email" id="register-email" placeholder="Enter your email" required>
+
+      <label for="register-password">Password:</label>
+      <input type="password" id="register-password" placeholder="Create a password" required>
+
+     <label for="register-phone">Phone:</label>
+     <input type="tel" id="register-phone" placeholder="Enter your phone number" required>
+
+    <!-- ...existing code... -->
+    <label for="register-confirm-password">Confirm Password:</label>
+    <input type="password" id="register-confirm-password" placeholder="Re-enter your password" required>
+    <!-- ...existing code... -->
+
+
+<script>
+  const userName = localStorage.getItem('userName');
+  const userEmail = localStorage.getItem('userEmail');
+  const cartContent = document.getElementById('cart-content');
+
+  // Lấy giỏ hàng từ localStorage (nếu chưa có thì tạo mẫu)
+  let cart = JSON.parse(localStorage.getItem('cart')) || [
+    { name: 'iPhone 16', quantity: 2, price: 1000 },
+    { name: 'Samsung Galaxy S21 Ultra 5G', quantity: 1, price: 500 }
+  ];
+
+  function renderCart() {
+    if (cart.length === 0) {
+      cartContent.innerHTML = "<p>Giỏ hàng của bạn đang trống.</p>";
+      localStorage.setItem('cart', JSON.stringify(cart));
+      return;
+    }
+    let total = 0;
+    let rows = cart.map((item, idx) => {
+      const itemTotal = item.quantity * item.price;
+      total += itemTotal;
+      return `
+        <tr>
+          <td>${item.name}</td>
+          <td>
+            <input type="number" min="1" value="${item.quantity}" data-idx="${idx}" class="qty-input" style="width:50px;">
+          </td>
+          <td>$${item.price}</td>
+          <td>$${itemTotal}</td>
+          <td>
+            <button class="delete-btn" data-idx="${idx}">Xóa</button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+    cartContent.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows}
+        </tbody>
+      </table>
+      <p>Total Amount: $${total}</p>
+      <button class="btn">Proceed to Checkout</button>
+    `;
+
+    // Gắn sự kiện xóa
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.onclick = function() {
+        const idx = this.getAttribute('data-idx');
+        cart.splice(idx, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+      };
+    });
+
+    // Gắn sự kiện sửa số lượng
+    document.querySelectorAll('.qty-input').forEach(input => {
+      input.onchange = function() {
+        const idx = this.getAttribute('data-idx');
+        let val = parseInt(this.value);
+        if (val < 1) val = 1;
+        cart[idx].quantity = val;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+      };
+    });
+  }
+
+  if (!userName || !userEmail) {
+    cartContent.innerHTML = `<p style="color:red;">Bạn cần <a href="Login.html">đăng nhập</a> để xem giỏ hàng.</p>`;
+  } else {
+    renderCart();
+  }
+</script>
+
+    <button type="submit" class="btn">Register</button>
+    </form>
+  </div>
+<script>
+  document.getElementById('register-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('register-name').value.trim();
+  const email = document.getElementById('register-email').value.trim();
+  const phone = document.getElementById('register-phone').value.trim();
+  const password = document.getElementById('register-password').value;
+  const confirmPassword = document.getElementById('register-confirm-password').value;
+
+  if (!name || !email || !phone || !password || !confirmPassword) {
+    alert('Please fill out all fields.');
+    return;
+  }
+
+  // Kiểm tra định dạng email đơn giản
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  // Kiểm tra định dạng số điện thoại (10-11 số)
+  const phonePattern = /^\d{10,11}$/;
+  if (!phonePattern.test(phone)) {
+    alert('Please enter a valid phone number (10-11 digits).');
+    return;
+  }
+
+  if (password.length < 6) {
+    alert('Password must be at least 6 characters long.');
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    alert('Passwords do not match.');
+    return;
+  }
+
+  // Lưu vào localStorage
+  localStorage.setItem('registeredName', name);
+  localStorage.setItem('registeredEmail', email);
+  localStorage.setItem('registeredPhone', phone);
+  localStorage.setItem('registeredPassword', password);
+
+  alert('Registration successful! Redirecting to login...');
+  setTimeout(() => {
+    window.location.href = 'login.html';
+  }, 1000);
+  });
+</script>
+  
+</body>
+</html>
