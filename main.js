@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     });
   }
+});
 
   // ======================= Toggle Menu =======================
   const menu = document.querySelector('#menu-icon');
