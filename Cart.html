@@ -6,104 +6,159 @@
   <title>Cart</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+  <style>
+    /* 👇 Thêm fix ở đây */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .modal-overlay.show {
+      display: flex !important;
+    }
+  </style>
 </head>
 <body>
   <header>
-  <a href="BaoHuynh.html" class="logo"><i class='bx bx-devices'></i>BảoHuỳnh</a>
-  <ul class="navbar">
-    <li><a href="BaoHuynh.html">Home</a></li>
- 
-  </ul>
-</header>
+    <a href="index.html" class="logo"><i class='bx bx-devices'></i>BảoHuỳnh</a>
+    <ul class="navbar">
+      <li><a href="index.html">Home</a></li>
+    </ul>
+  </header> 
 
   <div class="cart-page" id="cart-page">
     <h1><br>My Cart</br></h1>
     <div id="cart-content"></div>
+
+    <!-- ✅ Nút quay lại -->
+    <br><br>
+    <a href="index.html" class="btn back-btn">
+      <i class='bx bx-arrow-back'></i> Return to homepage
+    </a>
   </div>
+
+  <!-- ✅ Modal thanh toán -->
+  <div id="payment-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h2>Xác nhận đơn hàng</h2>
+      <p>Bạn có chắc muốn thanh toán đơn hàng hiện tại không?</p>
+      <div class="modal-actions">
+        <button class="btn cancel-btn" onclick="closePaymentModal()">Huỷ</button>
+        <button class="btn confirm-btn" onclick="confirmPayment()">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-  const userName = localStorage.getItem('userName');
-  const userEmail = localStorage.getItem('userEmail');
-  const cartContent = document.getElementById('cart-content');
+    const userName = localStorage.getItem('userName');
+    const userEmail = localStorage.getItem('userEmail');
+    const cartContent = document.getElementById('cart-content');
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-  // Lấy giỏ hàng từ localStorage (nếu chưa có thì tạo mẫu)
-  let cart = JSON.parse(localStorage.getItem('cart')) || [
-    { name: 'iPhone 16', quantity: 2, price: 1000 },
-    { name: 'Samsung Galaxy S21 Ultra 5G', quantity: 1, price: 500 }
-  ];
+    function renderCart() {
+      if (cart.length === 0) {
+        cartContent.innerHTML = "<p>Giỏ hàng của bạn đang trống.</p>";
+        localStorage.setItem('cart', JSON.stringify(cart));
+        return;
+      }
 
-  function renderCart() {
-    if (cart.length === 0) {
-      cartContent.innerHTML = "<p>Giỏ hàng của bạn đang trống.</p>";
-      localStorage.setItem('cart', JSON.stringify(cart));
-      return;
-    }
-    let total = 0;
-    let rows = cart.map((item, idx) => {
-      const itemTotal = item.quantity * item.price;
-      total += itemTotal;
-      return `
-        <tr>
-          <td>${item.name}</td>
-          <td>
-            <input type="number" min="1" value="${item.quantity}" data-idx="${idx}" class="qty-input" style="width:50px;">
-          </td>
-          <td>$${item.price}</td>
-          <td>$${itemTotal}</td>
-          <td>
-            <button class="delete-btn" data-idx="${idx}">Xóa</button>
-          </td>
-        </tr>
-      `;
-    }).join('');
-    cartContent.innerHTML = `
-      <table>
-        <thead>
+      let total = 0;
+      let rows = cart.map((item, idx) => {
+        const itemTotal = item.quantity * item.price;
+        total += itemTotal;
+        return `
           <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
-            <th>Action</th>
+            <td>${item.name}</td>
+            <td>
+              <input type="number" min="1" value="${item.quantity}" data-idx="${idx}" class="qty-input" style="width:50px;">
+            </td>
+            <td>$${item.price}</td>
+            <td>$${itemTotal}</td>
+            <td>
+              <button class="delete-btn" data-idx="${idx}">Xóa</button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          ${rows}
-        </tbody>
-      </table>
-      <p>Total Amount: $${total}</p>
-      <button class="btn">Proceed to Checkout</button>
-    `;
+        `;
+      }).join('');
 
-    // Gắn sự kiện xóa
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-      btn.onclick = function() {
-        const idx = this.getAttribute('data-idx');
-        cart.splice(idx, 1);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        renderCart();
-      };
-    });
+      cartContent.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows}
+          </tbody>
+        </table>
+        <p>Total Amount: $${total}</p>
+        <button class="btn-elegant-pay" onclick="openPaymentModal()">
+          <i class='bx bx-credit-card'></i>
+          <span>Pay</span>
+        </button>
+      `;
 
-    // Gắn sự kiện sửa số lượng
-    document.querySelectorAll('.qty-input').forEach(input => {
-      input.onchange = function() {
-        const idx = this.getAttribute('data-idx');
-        let val = parseInt(this.value);
-        if (val < 1) val = 1;
-        cart[idx].quantity = val;
-        localStorage.setItem('cart', JSON.stringify(cart));
-        renderCart();
-      };
-    });
-  }
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.onclick = function() {
+          const idx = this.getAttribute('data-idx');
+          cart.splice(idx, 1);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          renderCart();
+        };
+      });
 
-  if (!userName || !userEmail) {
-    cartContent.innerHTML = `<p style="color:red;">Bạn cần <a href="Login.html">đăng nhập</a> để xem giỏ hàng.</p>`;
-  } else {
-    renderCart();
-  }
-</script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="main.js"></script>
+      document.querySelectorAll('.qty-input').forEach(input => {
+        input.onchange = function() {
+          const idx = this.getAttribute('data-idx');
+          let val = parseInt(this.value);
+          if (val < 1) val = 1;
+          cart[idx].quantity = val;
+          localStorage.setItem('cart', JSON.stringify(cart));
+          renderCart();
+        };
+      });
+    }
+
+    function openPaymentModal() {
+      const modal = document.getElementById('payment-modal');
+      if (modal) modal.classList.add('show');
+    }
+
+    function closePaymentModal() {
+      const modal = document.getElementById('payment-modal');
+      if (modal) modal.classList.remove('show');
+    }
+
+    function confirmPayment() {
+      if (!cart || cart.length === 0) {
+        alert("⚠️ Giỏ hàng trống!");
+        closePaymentModal();
+        return;
+      }
+      localStorage.removeItem('cart');
+      alert("🎉 Thanh toán thành công! Cảm ơn bạn đã mua hàng.");
+      window.location.href = 'index.html';
+    }
+
+    // Gắn global nếu gọi từ HTML
+    window.openPaymentModal = openPaymentModal;
+    window.closePaymentModal = closePaymentModal;
+    window.confirmPayment = confirmPayment;
+
+    if (!userName || !userEmail) {
+      cartContent.innerHTML = `<p style="color:red;">Bạn cần <a href="Login.html">đăng nhập</a> để xem giỏ hàng.</p>`;
+    } else {
+      renderCart();
+    }
+  </script>
 </body>
 </html>

@@ -139,12 +139,15 @@
     return;
   }
 
-  // Kiểm tra định dạng email đơn giản
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(email)) {
-    alert('Please enter a valid email address.');
-    return;
-  }
+  // Kiểm tra định dạng email 
+  const emailPattern = /^[^\s@]+@(gmail\.com|yahoo\.com|outlook\.com|hotmail\.com|icloud\.com)$/i;
+
+if (!emailPattern.test(email)) {
+  alert('Email must be from Gmail, Yahoo, Outlook, Hotmail, or iCloud only.');
+  return;
+}
+
+  
 
   // Kiểm tra định dạng số điện thoại (10-11 số)
   const phonePattern = /^\d{10,11}$/;

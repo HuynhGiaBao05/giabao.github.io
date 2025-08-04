@@ -10,7 +10,7 @@ document.getElementById('login-form').addEventListener('submit', function (e) {
     alert('Please fill out all fields.');
     return;
   }
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const emailRegex = /^[^\s@]+@(gmail\.com|yahoo\.com|outlook\.com|hotmail\.com|icloud\.com)$/i;
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
 
 if (!emailRegex.test(email)) {
@@ -18,10 +18,7 @@ if (!emailRegex.test(email)) {
   return;
 }
 
-if (!passwordRegex.test(password)) {
-  alert('Password must be at least 6 characters long and contain both letters and numbers.');
-  return;
-}
+
 
   if (!savedEmail || !savedPassword) {
     alert('No registered account found. Please register first!');
